@@ -1,0 +1,1301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Profay Technologies | Fill In Portal</title>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon-black.png">
+  
+  <style>
+    :root {
+      --green: #00cc88;
+      --dark-green: #009966;
+      --black: #07110d;
+      --dark: #0d1915;
+      --card: #12221b;
+      --border: #234236;
+      --text: #f2fff9;
+      --muted: #9bb5aa;
+      --danger: #ff5c5c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(0,204,136,.12), transparent 30%),
+        var(--black);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 20px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(7,17,13,.95);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-content {
+      max-width: 950px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .logo {
+      font-weight: bold;
+      color: var(--green);
+      letter-spacing: 1px;
+      font-size: 20px;
+    }
+
+    .status {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .container {
+      max-width: 950px;
+      margin: 30px auto;
+      padding: 0 15px 60px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 6vw, 50px);
+      margin-bottom: 10px;
+    }
+
+    .hero h1 span {
+      color: var(--green);
+    }
+
+    .hero p {
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 650px;
+      margin: auto;
+    }
+
+    .progress-box {
+      margin: 25px 0;
+    }
+
+    .progress-info {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .progress {
+      height: 8px;
+      background: #172a22;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--green);
+      transition: .3s;
+    }
+
+    form {
+      display: grid;
+      gap: 20px;
+    }
+
+    .section {
+      background: linear-gradient(145deg, #12221b, #0c1813);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .section h2 {
+      font-size: 19px;
+      margin-bottom: 6px;
+    }
+
+    .section-description {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #09140f;
+      color: white;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 2px rgba(0,204,136,.08);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .counter {
+      color: var(--muted);
+      font-size: 11px;
+      text-align: right;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .option {
+      position: relative;
+    }
+
+    .option input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .option label {
+      display: block;
+      padding: 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      cursor: pointer;
+      background: #09140f;
+      transition: .2s;
+    }
+
+    .option label:hover {
+      border-color: var(--green);
+    }
+
+    .option input:checked + label {
+      border-color: var(--green);
+      background: rgba(0,204,136,.10);
+      color: var(--green);
+    }
+
+    .conditional {
+      display: none;
+      margin-top: 16px;
+    }
+
+    .conditional.show {
+      display: block;
+    }
+
+    .summary {
+      background: #07150f;
+      border: 1px dashed var(--green);
+      padding: 18px;
+      border-radius: 12px;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .summary strong {
+      color: var(--green);
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    button {
+      border: none;
+      padding: 15px;
+      border-radius: 11px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    .send {
+      background: var(--green);
+      color: #00150d;
+    }
+
+    .send:hover {
+      background: #00e89a;
+      transform: translateY(-2px);
+    }
+
+    .save {
+      background: #183229;
+      color: white;
+      border: 1px solid var(--border);
+    }
+
+    .save:hover {
+      border-color: var(--green);
+    }
+
+    .reset {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .message {
+      display: none;
+      padding: 14px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+
+    .message.success {
+      display: block;
+      background: rgba(0,204,136,.1);
+      border: 1px solid var(--green);
+      color: var(--green);
+    }
+
+    .message.error {
+      display: block;
+      background: rgba(255,92,92,.1);
+      border: 1px solid var(--danger);
+      color: #ff9b9b;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 35px;
+    }
+
+    footer span {
+      color: var(--green);
+    }
+
+    @media (max-width: 650px) {
+      .grid,
+      .options,
+      .actions {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 17px;
+      }
+
+      header {
+        padding: 15px;
+      }
+
+      .logo {
+        font-size: 16px;
+      }
+    }
+    .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.logo {
+  font-weight: bold;
+  color: var(--green);
+  letter-spacing: 1px;
+  font-size: 20px;
+}
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-content">
+
+    <div class="brand">
+      <img src="favicon-black.png" alt="Profay Technologies Logo">
+      <div class="logo">PROFAY TECHNOLOGIES</div>
+    </div>
+
+    <div class="status">Client Fill-In Portal</div>
+
+  </div>
+</header>
+<main class="container">
+
+  <div class="hero">
+    <h1>Let's Build Your <span>Digital Future</span></h1>
+
+    <p>
+      Complete this form so Profay Technologies can understand your
+      business, project and digital needs.
+    </p>
+  </div>
+
+  <div class="progress-box">
+    <div class="progress-info">
+      <span>Form Progress</span>
+      <span id="progressText">0%</span>
+    </div>
+
+    <div class="progress">
+      <div class="progress-bar" id="progressBar"></div>
+    </div>
+  </div>
+
+  <div id="message" class="message"></div>
+
+  <form id="clientForm">
+
+    <!-- BUSINESS INFORMATION -->
+
+    <section class="section">
+
+      <h2>🏢 Business Information</h2>
+
+      <p class="section-description">
+        Tell us about the business or organization.
+      </p>
+
+      <div class="grid">
+
+        <div class="field">
+          <label>Business Name *</label>
+
+          <input
+            type="text"
+            id="businessName"
+            placeholder="e.g. Sars City Academy"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>Business Category *</label>
+
+          <select id="category" required>
+
+            <option value="">Select category</option>
+
+            <option>School / Educational Institution</option>
+            <option>Restaurant / Food Business</option>
+            <option>Church / Religious Organization</option>
+            <option>Barber Shop / Beauty Business</option>
+            <option>Clothing / Fashion</option>
+            <option>Technology / Software</option>
+            <option>Personal Portfolio</option>
+            <option>Small Business</option>
+            <option>Organization / NGO</option>
+            <option>Event / Entertainment</option>
+            <option>Real Estate</option>
+            <option>Other</option>
+
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Owner / Contact Person *</label>
+
+          <input
+            type="text"
+            id="ownerName"
+            placeholder="Full name"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>Phone / WhatsApp *</label>
+
+          <input
+            type="tel"
+            id="phone"
+            placeholder="e.g. 0200000000"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label>Email</label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="business@example.com"
+          >
+        </div>
+
+        <div class="field">
+          <label>Location</label>
+
+          <input
+            type="text"
+            id="location"
+            placeholder="Town / City"
+          >
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- SERVICE -->
+
+    <section class="section">
+
+      <h2>🛠️ What Do You Need?</h2>
+
+      <p class="section-description">
+        Select the service you are interested in.
+      </p>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="radio" name="service" id="website" value="Website Development">
+          <label for="website">🌐 Website Development</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="service" id="flyer" value="Flyer / Graphic Design">
+          <label for="flyer">🎨 Flyer / Graphic Design</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="service" id="branding" value="Branding Solutions">
+          <label for="branding">✨ Branding Solutions</label>
+        </div>
+
+        <div class="option">
+          <input type="radio" name="service" id="training" value="Programming Training">
+          <label for="training">💻 Programming Training</label>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- WEBSITE FEATURES -->
+
+    <section class="section conditional" id="websiteSection">
+
+      <h2>🌐 Website Requirements</h2>
+
+      <p class="section-description">
+        Select the features you would like your website to have.
+      </p>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="checkbox" id="homePage" value="Home Page">
+          <label for="homePage">Home Page</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox" id="aboutPage" value="About Page">
+          <label for="aboutPage">About Us</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox" id="servicesPage" value="Services">
+          <label for="servicesPage">Services</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox" id="contactPage" value="Contact Page">
+          <label for="contactPage">Contact Page</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox" id="gallery" value="Gallery">
+          <label for="gallery">Photo Gallery</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox" id="booking" value="Online Booking">
+          <label for="booking">Online Booking</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox" id="whatsapp" value="WhatsApp Integration">
+          <label for="whatsapp">WhatsApp Integration</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox" id="social" value="Social Media Links">
+          <label for="social">Social Media Links</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox" id="maps" value="Google Maps">
+          <label for="maps">Google Maps</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox" id="reviews" value="Customer Reviews">
+          <label for="reviews">Customer Reviews</label>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DESIGN -->
+
+    <section class="section conditional" id="designSection">
+
+      <h2>🎨 Design Requirements</h2>
+
+      <p class="section-description">
+        Tell us what type of design you need.
+      </p>
+
+      <div class="options">
+
+        <div class="option">
+          <input type="checkbox" id="poster" value="Poster">
+          <label for="poster">Poster</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox" id="advertisement" value="Advertisement">
+          <label for="advertisement">Business Advertisement</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox" id="socialGraphic" value="Social Media Graphic">
+          <label for="socialGraphic">Social Media Graphic</label>
+        </div>
+
+        <div class="option">
+          <input type="checkbox" id="admission" value="Admission Flyer">
+          <label for="admission">Admission Flyer</label>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- DESCRIPTION -->
+
+    <section class="section">
+
+      <h2>📝 Project Description</h2>
+
+      <p class="section-description">
+        Describe what you want Profay Technologies to create.
+      </p>
+
+      <textarea
+        id="description"
+        maxlength="600"
+        placeholder="Tell us about your project..."
+        required
+      ></textarea>
+
+      <div class="counter">
+        <span id="charCount">0</span>/600
+      </div>
+
+    </section>
+
+
+    <!-- BUDGET -->
+
+    <section class="section">
+
+      <h2>💰 Budget & Timeline</h2>
+
+      <div class="grid">
+
+        <div class="field">
+
+          <label>Estimated Budget</label>
+
+          <select id="budget">
+
+            <option value="">Select budget</option>
+
+            <option>Below GH₵100</option>
+            <option>GH₵100 - GH₵300</option>
+            <option>GH₵300 - GH₵500</option>
+            <option>GH₵500 - GH₵1,000</option>
+            <option>GH₵1,000+</option>
+            <option>Not sure yet</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Preferred Delivery</label>
+
+          <select id="timeline">
+
+            <option value="">Select timeline</option>
+
+            <option>As soon as possible</option>
+            <option>Within 3 days</option>
+            <option>Within 1 week</option>
+            <option>Within 2 weeks</option>
+            <option>No specific deadline</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- EXTRA -->
+
+    <section class="section">
+
+      <h2>💡 Additional Information</h2>
+
+      <p class="section-description">
+        Anything else we should know?
+      </p>
+
+      <textarea
+        id="extra"
+        maxlength="400"
+        placeholder="Logo, colors, special requirements, reference websites, etc."
+      ></textarea>
+
+    </section>
+
+
+    <!-- SUMMARY -->
+
+    <section class="section">
+
+      <h2>📋 Request Summary</h2>
+
+      <div class="summary" id="summary">
+        Start filling the form to see your request summary.
+      </div>
+
+    </section>
+
+
+    <!-- ACTIONS -->
+
+    <section class="section">
+
+      <div class="actions">
+
+        <button
+          type="button"
+          class="save"
+          id="saveBtn"
+        >
+          💾 Save Form
+        </button>
+
+        <button
+          type="submit"
+          class="send"
+        >
+          📲 Send to Profay Technologies
+        </button>
+
+      </div>
+
+      <button
+        type="button"
+        class="reset"
+        id="resetBtn"
+      >
+        Reset Form
+      </button>
+
+    </section>
+
+  </form>
+
+
+  <footer>
+    <p>
+      © 2026 <span>Profay Technologies</span>
+    </p>
+
+    <p>
+      Code. Create. Empower.
+    </p>
+  </footer>
+
+</main>
+
+
+<script>
+
+  const form = document.getElementById("clientForm");
+
+  const message = document.getElementById("message");
+
+  const progressBar = document.getElementById("progressBar");
+
+  const progressText = document.getElementById("progressText");
+
+  const summary = document.getElementById("summary");
+
+  const description = document.getElementById("description");
+
+  const charCount = document.getElementById("charCount");
+
+  const websiteSection = document.getElementById("websiteSection");
+
+  const designSection = document.getElementById("designSection");
+
+
+  // --------------------------------
+  // SERVICE CONDITIONAL SECTIONS
+  // --------------------------------
+
+  document.querySelectorAll('input[name="service"]').forEach(service => {
+
+    service.addEventListener("change", () => {
+
+      websiteSection.classList.remove("show");
+      designSection.classList.remove("show");
+
+      if (service.value === "Website Development") {
+        websiteSection.classList.add("show");
+      }
+
+      if (
+        service.value === "Flyer / Graphic Design" ||
+        service.value === "Branding Solutions"
+      ) {
+        designSection.classList.add("show");
+      }
+
+      updateProgress();
+      updateSummary();
+
+    });
+
+  });
+
+
+  // --------------------------------
+  // CHARACTER COUNTER
+  // --------------------------------
+
+  description.addEventListener("input", () => {
+
+    charCount.textContent = description.value.length;
+
+    updateProgress();
+    updateSummary();
+
+  });
+
+
+  // --------------------------------
+  // GET CHECKED OPTIONS
+  // --------------------------------
+
+  function getChecked(sectionId) {
+
+    const section = document.getElementById(sectionId);
+
+    if (!section) return [];
+
+    return [...section.querySelectorAll('input[type="checkbox"]:checked')]
+      .map(item => item.value);
+
+  }
+
+
+  // --------------------------------
+  // GET SERVICE
+  // --------------------------------
+
+  function getService() {
+
+    const selected = document.querySelector(
+      'input[name="service"]:checked'
+    );
+
+    return selected ? selected.value : "";
+
+  }
+
+
+  // --------------------------------
+  // UPDATE SUMMARY
+  // --------------------------------
+
+  function updateSummary() {
+
+    const business =
+      document.getElementById("businessName").value || "Not provided";
+
+    const category =
+      document.getElementById("category").value || "Not selected";
+
+    const owner =
+      document.getElementById("ownerName").value || "Not provided";
+
+    const phone =
+      document.getElementById("phone").value || "Not provided";
+
+    const service =
+      getService() || "Not selected";
+
+    const budget =
+      document.getElementById("budget").value || "Not selected";
+
+    const timeline =
+      document.getElementById("timeline").value || "Not selected";
+
+    const features = [
+      ...getChecked("websiteSection"),
+      ...getChecked("designSection")
+    ];
+
+    summary.innerHTML = `
+
+      <strong>Business:</strong> ${escapeHTML(business)}<br>
+
+      <strong>Category:</strong> ${escapeHTML(category)}<br>
+
+      <strong>Contact:</strong> ${escapeHTML(owner)}<br>
+
+      <strong>Phone:</strong> ${escapeHTML(phone)}<br>
+
+      <strong>Service:</strong> ${escapeHTML(service)}<br>
+
+      <strong>Features:</strong>
+      ${features.length ? features.map(escapeHTML).join(", ") : "None selected"}<br>
+
+      <strong>Budget:</strong> ${escapeHTML(budget)}<br>
+
+      <strong>Timeline:</strong> ${escapeHTML(timeline)}
+
+    `;
+
+  }
+
+
+  // --------------------------------
+  // ESCAPE HTML
+  // --------------------------------
+
+  function escapeHTML(value) {
+
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+  }
+
+
+  // --------------------------------
+  // PROGRESS
+  // --------------------------------
+
+  function updateProgress() {
+
+    const requiredFields = [
+      document.getElementById("businessName"),
+      document.getElementById("category"),
+      document.getElementById("ownerName"),
+      document.getElementById("phone"),
+      description
+    ];
+
+    let completed = requiredFields.filter(
+      field => field.value.trim() !== ""
+    ).length;
+
+    if (getService()) {
+      completed++;
+    }
+
+    const total = 6;
+
+    const percentage = Math.min(
+      Math.round((completed / total) * 100),
+      100
+    );
+
+    progressBar.style.width = percentage + "%";
+
+    progressText.textContent = percentage + "%";
+
+  }
+
+
+  // --------------------------------
+  // LIVE FORM UPDATES
+  // --------------------------------
+
+  form.addEventListener("input", () => {
+
+    updateProgress();
+    updateSummary();
+
+  });
+
+
+  form.addEventListener("change", () => {
+
+    updateProgress();
+    updateSummary();
+
+  });
+
+
+  // --------------------------------
+  // SAVE FORM
+  // --------------------------------
+
+  document.getElementById("saveBtn").addEventListener("click", () => {
+
+    const data = new FormData(form);
+
+    const savedData = {};
+
+    data.forEach((value, key) => {
+
+      if (savedData[key]) {
+
+        if (!Array.isArray(savedData[key])) {
+          savedData[key] = [savedData[key]];
+        }
+
+        savedData[key].push(value);
+
+      } else {
+
+        savedData[key] = value;
+
+      }
+
+    });
+
+    localStorage.setItem(
+      "profayClientForm",
+      JSON.stringify(savedData)
+    );
+
+    showMessage(
+      "Your form has been saved on this device.",
+      "success"
+    );
+
+  });
+
+
+  // --------------------------------
+  // LOAD SAVED FORM
+  // --------------------------------
+
+  window.addEventListener("DOMContentLoaded", () => {
+
+    const saved =
+      localStorage.getItem("profayClientForm");
+
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+
+    Object.entries(data).forEach(([key, value]) => {
+
+      const input = form.elements[key];
+
+      if (!input) return;
+
+      if (input.type === "radio") {
+
+        [...document.querySelectorAll(
+          `[name="${key}"]`
+        )].forEach(radio => {
+
+          radio.checked = radio.value === value;
+
+        });
+
+      }
+
+    });
+
+    updateProgress();
+    updateSummary();
+
+  });
+
+
+  // --------------------------------
+  // SEND TO WHATSAPP
+  // --------------------------------
+
+  form.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    if (!form.checkValidity()) {
+
+      form.reportValidity();
+
+      showMessage(
+        "Please complete all required fields.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const business =
+      document.getElementById("businessName").value;
+
+    const category =
+      document.getElementById("category").value;
+
+    const owner =
+      document.getElementById("ownerName").value;
+
+    const phone =
+      document.getElementById("phone").value;
+
+    const email =
+      document.getElementById("email").value || "Not provided";
+
+    const location =
+      document.getElementById("location").value || "Not provided";
+
+    const service =
+      getService();
+
+    const features = [
+      ...getChecked("websiteSection"),
+      ...getChecked("designSection")
+    ];
+
+    const budget =
+      document.getElementById("budget").value || "Not provided";
+
+    const timeline =
+      document.getElementById("timeline").value || "Not provided";
+
+    const projectDescription =
+      description.value;
+
+    const extra =
+      document.getElementById("extra").value || "None";
+
+
+    const whatsappMessage = `
+
+*PROFAY TECHNOLOGIES - NEW CLIENT REQUEST*
+
+*BUSINESS INFORMATION*
+
+Business Name: ${business}
+
+Category: ${category}
+
+Owner / Contact: ${owner}
+
+Phone: ${phone}
+
+Email: ${email}
+
+Location: ${location}
+
+
+*SERVICE REQUEST*
+
+Service: ${service}
+
+Features: ${features.length ? features.join(", ") : "None selected"}
+
+
+*PROJECT DESCRIPTION*
+
+${projectDescription}
+
+
+*BUDGET & TIMELINE*
+
+Budget: ${budget}
+
+Delivery: ${timeline}
+
+
+*ADDITIONAL INFORMATION*
+
+${extra}
+
+
+Sent from the Profay Technologies Fill-In Portal.
+
+    `.trim();
+
+
+    /*
+      Profay Technologies WhatsApp number
+      Replace this number if you change your business WhatsApp.
+    */
+
+    const whatsappNumber = "233202963321";
+
+    const url =
+      `https://wa.me/${whatsappNumber}?text=` +
+      encodeURIComponent(whatsappMessage);
+
+
+    showMessage(
+      "Your request is ready. Opening WhatsApp...",
+      "success"
+    );
+
+    setTimeout(() => {
+
+      window.open(url, "_blank");
+
+    }, 700);
+
+  });
+
+
+  // --------------------------------
+  // RESET
+  // --------------------------------
+
+  document.getElementById("resetBtn").addEventListener("click", () => {
+
+    const confirmReset =
+      confirm("Are you sure you want to clear the form?");
+
+    if (!confirmReset) return;
+
+    form.reset();
+
+    localStorage.removeItem("profayClientForm");
+
+    websiteSection.classList.remove("show");
+
+    designSection.classList.remove("show");
+
+    charCount.textContent = "0";
+
+    updateProgress();
+
+    updateSummary();
+
+    showMessage(
+      "Form has been reset.",
+      "success"
+    );
+
+  });
+
+
+  // --------------------------------
+  // MESSAGE
+  // --------------------------------
+
+  function showMessage(text, type) {
+
+    message.textContent = text;
+
+    message.className =
+      "message " + type;
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  updateProgress();
+
+  updateSummary();
+
+</script>
+
+</body>
+</html>
